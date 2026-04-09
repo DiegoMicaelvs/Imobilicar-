@@ -1,0 +1,30 @@
+framework-feb12df8fd4c4694.js:1 Unrecognized feature: 'navigation-override'.
+framework-feb12df8fd4c4694.js:1 Unrecognized feature: 'oversized-images'.
+framework-feb12df8fd4c4694.js:1 Unrecognized feature: 'publickey-credentials'.
+framework-feb12df8fd4c4694.js:1 Unrecognized feature: 'speaker-selection'.
+framework-feb12df8fd4c4694.js:1 Unrecognized feature: 'unoptimized-images'.
+framework-feb12df8fd4c4694.js:1 Unrecognized feature: 'unsized-media'.
+framework-feb12df8fd4c4694.js:1 Unrecognized feature: 'pointer-lock'.
+framework-feb12df8fd4c4694.js:1 Allow attribute will take precedence over 'allowfullscreen'.
+framework-feb12df8fd4c4694.js:1 Allow attribute will take precedence over 'allowpaymentrequest'.
+workspace_iframe.htm…%2F&id=%3Ar4l%3A:32 Error while parsing the 'sandbox' attribute: 'allow-downloads-without-user-activation' is an invalid sandbox flag.
+workspace_iframe.htm…%2F&id=%3Ar4l%3A:32 Unrecognized feature: 'ambient-light-sensor'.
+workspace_iframe.htm…%2F&id=%3Ar4l%3A:32 Unrecognized feature: 'battery'.
+workspace_iframe.htm…%2F&id=%3Ar4l%3A:32 Unrecognized feature: 'execution-while-not-rendered'.
+workspace_iframe.htm…%2F&id=%3Ar4l%3A:32 Unrecognized feature: 'execution-while-out-of-viewport'.
+workspace_iframe.htm…%2F&id=%3Ar4l%3A:32 Unrecognized feature: 'layout-animations'.
+workspace_iframe.htm…%2F&id=%3Ar4l%3A:32 Unrecognized feature: 'legacy-image-formats'.
+workspace_iframe.htm…%2F&id=%3Ar4l%3A:32 Unrecognized feature: 'navigation-override'.
+workspace_iframe.htm…%2F&id=%3Ar4l%3A:32 Unrecognized feature: 'oversized-images'.
+workspace_iframe.htm…%2F&id=%3Ar4l%3A:32 Unrecognized feature: 'publickey-credentials'.
+workspace_iframe.htm…%2F&id=%3Ar4l%3A:32 Unrecognized feature: 'speaker-selection'.
+workspace_iframe.htm…%2F&id=%3Ar4l%3A:32 Unrecognized feature: 'unoptimized-images'.
+workspace_iframe.htm…%2F&id=%3Ar4l%3A:32 Unrecognized feature: 'unsized-media'.
+workspace_iframe.htm…%2F&id=%3Ar4l%3A:32 Allow attribute will take precedence over 'allowfullscreen'.
+workspace_iframe.htm…%2F&id=%3Ar4l%3A:32 Allow attribute will take precedence over 'allowpaymentrequest'.
+main.tsx:9 Service Worker registrado com sucesso: https://33fceaea-69bf-4697-bf43-d8748313ba41-00-2iuhiy89k9nmf.janeway.replit.dev/
+client:536 WebSocket connection to 'wss://33fceaea-69bf-4697-bf43-d8748313ba41-00-2iuhiy89k9nmf.janeway.replit.dev/?token=88mbJcG-nIhB' failed: 
+client:536 Uncaught (in promise) SyntaxError: Failed to construct 'WebSocket': The URL 'wss://localhost:undefined/?token=88mbJcG-nIhB' is invalid.
+    at setupWebSocket (client:536:19)
+    at fallback (client:509:16)
+    at WebSocket.<anonymous> (client:555:7)

@@ -1,0 +1,141 @@
+﻿client/src/pages/crm/domains/investors/InvestorManagement.tsx(153,31): error TS2802: Type 'Set<number>' can only be iterated through when using the '--downlevelIteration' flag or with a '--target' of 'es2015' or higher.
+client/src/pages/crm/domains/investors/InvestorManagement.tsx(1000,36): error TS2802: Type 'Set<number>' can only be iterated through when using the '--downlevelIteration' flag or with a '--target' of 'es2015' or higher.
+client/src/pages/crm/domains/investors/InvestorManagement.tsx(2681,39): error TS2802: Type 'Set<number>' can only be iterated through when using the '--downlevelIteration' flag or with a '--target' of 'es2015' or higher.
+client/src/pages/crm/domains/rentals/RentalWizard.tsx(1115,19): error TS2322: Type '{ currentFile: { name: any; url: any; } | null; onFileChange: (fileData: { fileName: string; fileUrl: string; } | null) => void; accept: string; }' is not assignable to type 'IntrinsicAttributes & FileUploadZoneProps'.
+  Property 'currentFile' does not exist on type 'IntrinsicAttributes & FileUploadZoneProps'.
+client/src/pages/crm/domains/rentals/RentalWizard.tsx(1123,44): error TS2339: Property 'url' does not exist on type '{ fileName: string; fileUrl: string; }'.
+client/src/pages/crm/domains/rentals/RentalWizard.tsx(1124,49): error TS2339: Property 'name' does not exist on type '{ fileName: string; fileUrl: string; }'.
+client/src/pages/crm/domains/rentals/RentalWizard.tsx(1145,41): error TS7006: Parameter 'prev' implicitly has an 'any' type.
+client/src/pages/crm/domains/rentals/RentalWizard.tsx(1145,41): error TS2345: Argument of type '(prev: any) => number' is not assignable to parameter of type 'number'.
+client/src/pages/crm/domains/rentals/RentalWizard.tsx(1157,32): error TS7006: Parameter 'prev' implicitly has an 'any' type.
+client/src/pages/crm/domains/rentals/RentalWizard.tsx(1157,32): error TS2345: Argument of type '(prev: any) => number' is not assignable to parameter of type 'number'.
+client/src/pages/customer-details-new.tsx(1273,75): error TS2769: No overload matches this call.
+  Overload 1 of 4, '(value: string | number | Date): Date', gave the following error.
+    Argument of type 'Date | null' is not assignable to parameter of type 'string | number | Date'.
+      Type 'null' is not assignable to type 'string | number | Date'.
+  Overload 2 of 4, '(value: string | number): Date', gave the following error.
+    Argument of type 'Date | null' is not assignable to parameter of type 'string | number'.
+      Type 'null' is not assignable to type 'string | number'.
+client/src/pages/customer-details.tsx(428,75): error TS2769: No overload matches this call.
+  Overload 1 of 4, '(value: string | number | Date): Date', gave the following error.
+    Argument of type 'Date | null' is not assignable to parameter of type 'string | number | Date'.
+      Type 'null' is not assignable to type 'string | number | Date'.
+  Overload 2 of 4, '(value: string | number): Date', gave the following error.
+    Argument of type 'Date | null' is not assignable to parameter of type 'string | number'.
+      Type 'null' is not assignable to type 'string | number'.
+client/src/pages/customer-portal.tsx(119,30): error TS2339: Property 'filter' does not exist on type '{}'.
+client/src/pages/customer-portal.tsx(238,39): error TS2339: Property 'filter' does not exist on type '{}'.
+client/src/pages/customer-portal.tsx(307,40): error TS2339: Property 'length' does not exist on type '{}'.
+client/src/pages/customer-portal.tsx(335,20): error TS2339: Property 'map' does not exist on type '{}'.
+client/src/pages/customer-portal.tsx(340,48): error TS2802: Type 'Set<unknown>' can only be iterated through when using the '--downlevelIteration' flag or with a '--target' of 'es2015' or higher.
+client/src/pages/customer-portal.tsx(385,40): error TS2339: Property 'length' does not exist on type '{}'.
+client/src/pages/customer-portal.tsx(388,40): error TS2339: Property 'filter' does not exist on type '{}'.
+client/src/pages/customer-portal.tsx(411,64): error TS2339: Property 'filter' does not exist on type '{}'.
+client/src/pages/customer-portal.tsx(418,67): error TS2339: Property 'filter' does not exist on type '{}'.
+client/src/pages/customer-portal.tsx(487,60): error TS2339: Property 'length' does not exist on type '{}'.
+client/src/pages/customer-portal.tsx(489,41): error TS2339: Property 'map' does not exist on type '{}'.
+client/src/pages/customer-portal.tsx(593,26): error TS18046: 'investorVehicles' is of type 'unknown'.
+client/src/pages/customer-portal.tsx(920,51): error TS2339: Property 'length' does not exist on type '{}'.
+client/src/pages/customer-portal.tsx(923,37): error TS2339: Property 'map' does not exist on type '{}'.
+client/src/pages/customer-portal.tsx(993,59): error TS2339: Property 'filter' does not exist on type '{}'.
+client/src/pages/dashboard.tsx(5,32): error TS2305: Module '"@shared/schema"' has no exported member 'Investor'.
+client/src/pages/investor-details.tsx(217,47): error TS2339: Property 'dividendAmount' does not exist on type '{ id: string; createdAt: Date; category: string; minValue: string; maxValue: string; minDividend: string; maxDividend: string; updatedAt: Date; }'.
+client/src/pages/investor-details.tsx(599,9): error TS2322: Type 'number | null' is not assignable to type 'string | null | undefined'.
+  Type 'number' is not assignable to type 'string'.
+client/src/pages/investor-details.tsx(742,40): error TS2345: Argument of type 'string | null' is not assignable to parameter of type 'SetStateAction<number | null>'.
+  Type 'string' is not assignable to type 'SetStateAction<number | null>'.
+client/src/pages/investor-details.tsx(2455,26): error TS2322: Type '{ "data-testid": string; onChange: (...event: any[]) => void; onBlur: Noop; value: string | null | undefined; disabled?: boolean | undefined; name: "imageUrl"; ref: RefCallBack; placeholder: string; }' is not assignable to type 'Omit<DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>, "ref">'.
+  Types of property 'value' are incompatible.
+    Type 'string | null | undefined' is not assignable to type 'string | number | readonly string[] | undefined'.
+      Type 'null' is not assignable to type 'string | number | readonly string[] | undefined'.
+client/src/pages/investor-details.tsx(2477,50): error TS2339: Property 'dividendAmount' does not exist on type '{ id: string; createdAt: Date; category: string; minValue: string; maxValue: string; minDividend: string; maxDividend: string; updatedAt: Date; }'.
+server/routes.ts(420,28): error TS18048: 'user' is possibly 'undefined'.
+server/routes.ts(430,25): error TS18048: 'user' is possibly 'undefined'.
+server/routes.ts(433,41): error TS18048: 'user' is possibly 'undefined'.
+server/routes.ts(439,30): error TS18048: 'user' is possibly 'undefined'.
+server/routes.ts(448,42): error TS18048: 'user' is possibly 'undefined'.
+server/routes.ts(449,41): error TS18048: 'user' is possibly 'undefined'.
+server/routes.ts(452,39): error TS18048: 'user' is possibly 'undefined'.
+server/routes.ts(465,19): error TS18048: 'user' is possibly 'undefined'.
+server/routes.ts(511,27): error TS2339: Property 'isActive' does not exist on type '{ number: string | null; id: string; name: string; status: string; email: string; password: string | null; state: string | null; cpf: string; phone: string; rg: string | null; birthDate: string | null; ... 42 more ...; lastRentalAt: Date | null; }'.
+server/routes.ts(937,51): error TS18047: 'adminUser.cpf' is possibly 'null'.
+server/routes.ts(990,24): error TS2339: Property 'color' does not exist on type '{ id: string; name: string; brand: string; category: string; model: string; year: number; pricePerDay: string; monthlyPrice: string | null; transmission: string; fuel: string; seats: number; imageUrl: string; ... 42 more ...; damageDescription: string | null; }'.
+server/routes.ts(1040,66): error TS2345: Argument of type '{ name?: string | undefined; brand?: string | undefined; category?: string | undefined; model?: string | undefined; year?: number | undefined; pricePerDay?: string | undefined; monthlyPrice?: string | ... 1 more ... | undefined; ... 46 more ...; damageDescription?: string | ... 1 more ... | undefined; }' is not assignable to parameter of type 'Partial<{ id: string; name: string; brand: string; category: string; model: string; year: number; pricePerDay: string; monthlyPrice: string | null; transmission: string; fuel: string; seats: number; imageUrl: string; ... 42 more ...; damageDescription: string | null; }>'.
+  Types of property 'imageUrl' are incompatible.
+    Type 'string | null | undefined' is not assignable to type 'string | undefined'.
+      Type 'null' is not assignable to type 'string | undefined'.
+server/routes.ts(1405,25): error TS2339: Property 'isMonthly' does not exist on type '{ customerName: string; customerEmail: string; customerPhone: string; customerCpf: string; status?: "pending" | "approved" | "completed" | "cancelled" | "active" | undefined; state?: string | null | undefined; ... 52 more ...; selectedPlanIds?: string[] | ... 1 more ... | undefined; }'.
+server/routes.ts(1405,52): error TS2339: Property 'startMonth' does not exist on type '{ customerName: string; customerEmail: string; customerPhone: string; customerCpf: string; status?: "pending" | "approved" | "completed" | "cancelled" | "active" | undefined; state?: string | null | undefined; ... 52 more ...; selectedPlanIds?: string[] | ... 1 more ... | undefined; }'.
+server/routes.ts(1405,80): error TS2339: Property 'endMonth' does not exist on type '{ customerName: string; customerEmail: string; customerPhone: string; customerCpf: string; status?: "pending" | "approved" | "completed" | "cancelled" | "active" | undefined; state?: string | null | undefined; ... 52 more ...; selectedPlanIds?: string[] | ... 1 more ... | undefined; }'.
+server/routes.ts(1407,55): error TS2339: Property 'startMonth' does not exist on type '{ customerName: string; customerEmail: string; customerPhone: string; customerCpf: string; status?: "pending" | "approved" | "completed" | "cancelled" | "active" | undefined; state?: string | null | undefined; ... 52 more ...; selectedPlanIds?: string[] | ... 1 more ... | undefined; }'.
+server/routes.ts(1409,44): error TS2339: Property 'endMonth' does not exist on type '{ customerName: string; customerEmail: string; customerPhone: string; customerCpf: string; status?: "pending" | "approved" | "completed" | "cancelled" | "active" | undefined; state?: string | null | undefined; ... 52 more ...; selectedPlanIds?: string[] | ... 1 more ... | undefined; }'.
+server/routes.ts(1425,50): error TS2345: Argument of type 'string | null | undefined' is not assignable to parameter of type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+server/routes.ts(1727,37): error TS2345: Argument of type 'string | null' is not assignable to parameter of type 'string'.
+  Type 'null' is not assignable to type 'string'.
+server/routes.ts(1774,37): error TS2345: Argument of type 'string | null' is not assignable to parameter of type 'string'.
+  Type 'null' is not assignable to type 'string'.
+server/routes.ts(1791,35): error TS2345: Argument of type 'string | null' is not assignable to parameter of type 'string'.
+  Type 'null' is not assignable to type 'string'.
+server/routes.ts(1853,35): error TS2345: Argument of type 'string | null' is not assignable to parameter of type 'string'.
+  Type 'null' is not assignable to type 'string'.
+server/routes.ts(1905,11): error TS2322: Type 'string | null' is not assignable to type 'string'.
+  Type 'null' is not assignable to type 'string'.
+server/routes.ts(1948,35): error TS2345: Argument of type 'string | null' is not assignable to parameter of type 'string'.
+  Type 'null' is not assignable to type 'string'.
+server/routes.ts(2002,11): error TS2322: Type 'string | null' is not assignable to type 'string'.
+  Type 'null' is not assignable to type 'string'.
+server/routes.ts(2018,35): error TS2345: Argument of type 'string | null' is not assignable to parameter of type 'string'.
+  Type 'null' is not assignable to type 'string'.
+server/routes.ts(2233,35): error TS2345: Argument of type 'string | null' is not assignable to parameter of type 'string'.
+  Type 'null' is not assignable to type 'string'.
+server/routes.ts(2716,39): error TS2339: Property 'investor' does not exist on type '{ id: string; name: string; status: string; brand: string; category: string; model: string; year: number; pricePerDay: string | null; monthlyPrice: string | null; transmission: string; fuel: string; ... 23 more ...; evaluationNivelGasolinaImage: string | null; }'.
+server/routes.ts(2717,43): error TS2339: Property 'investorCpf' does not exist on type '{ id: string; name: string; status: string; brand: string; category: string; model: string; year: number; pricePerDay: string | null; monthlyPrice: string | null; transmission: string; fuel: string; ... 23 more ...; evaluationNivelGasolinaImage: string | null; }'.
+server/routes.ts(2754,39): error TS2339: Property 'investor' does not exist on type '{ id: string; name: string; status: string; brand: string; category: string; model: string; year: number; pricePerDay: string | null; monthlyPrice: string | null; transmission: string; fuel: string; ... 23 more ...; evaluationNivelGasolinaImage: string | null; }'.
+server/routes.ts(3158,48): error TS2345: Argument of type 'string | null' is not assignable to parameter of type 'string'.
+  Type 'null' is not assignable to type 'string'.
+server/routes.ts(3206,48): error TS2345: Argument of type 'string | null' is not assignable to parameter of type 'string'.
+  Type 'null' is not assignable to type 'string'.
+server/routes.ts(3777,31): error TS2802: Type 'Set<string | null>' can only be iterated through when using the '--downlevelIteration' flag or with a '--target' of 'es2015' or higher.
+server/routes.ts(3821,51): error TS2802: Type 'Map<number, { id: string; name: string; brand: string; category: string; model: string; year: number; pricePerDay: string; monthlyPrice: string | null; transmission: string; fuel: string; seats: number; ... 43 more ...; damageDescription: string | null; }[]>' can only be iterated through when using the '--downlevelIteration' flag or with a '--target' of 'es2015' or higher.
+server/routes.ts(3822,50): error TS7006: Parameter 'v' implicitly has an 'any' type.
+server/routes.ts(3829,53): error TS7006: Parameter 'sum' implicitly has an 'any' type.
+server/routes.ts(3829,58): error TS7006: Parameter 'v' implicitly has an 'any' type.
+server/routes.ts(4126,13): error TS2322: Type 'number | null | undefined' is not assignable to type 'string | null | undefined'.
+  Type 'number' is not assignable to type 'string'.
+server/seed.ts(6,3): error TS2741: Property 'licensePlate' is missing in type '{ name: string; category: string; brand: string; model: string; year: number; pricePerDay: string; transmission: string; fuel: string; seats: number; imageUrl: string; available: true; isInvestorVehicle: false; ownerId: null; investorPercentage: number; }' but required in type '{ name: string; brand: string; category: string; model: string; year: number; pricePerDay: string; transmission: string; fuel: string; seats: number; licensePlate: string; monthlyPrice?: string | null | undefined; ... 42 more ...; damageDescription?: string | ... 1 more ... | undefined; }'.
+server/seed.ts(22,3): error TS2741: Property 'licensePlate' is missing in type '{ name: string; category: string; brand: string; model: string; year: number; pricePerDay: string; transmission: string; fuel: string; seats: number; imageUrl: string; available: true; isInvestorVehicle: false; ownerId: null; investorPercentage: number; }' but required in type '{ name: string; brand: string; category: string; model: string; year: number; pricePerDay: string; transmission: string; fuel: string; seats: number; licensePlate: string; monthlyPrice?: string | null | undefined; ... 42 more ...; damageDescription?: string | ... 1 more ... | undefined; }'.
+server/seed.ts(38,3): error TS2741: Property 'licensePlate' is missing in type '{ name: string; category: string; brand: string; model: string; year: number; pricePerDay: string; transmission: string; fuel: string; seats: number; imageUrl: string; available: true; isInvestorVehicle: false; ownerId: null; investorPercentage: number; }' but required in type '{ name: string; brand: string; category: string; model: string; year: number; pricePerDay: string; transmission: string; fuel: string; seats: number; licensePlate: string; monthlyPrice?: string | null | undefined; ... 42 more ...; damageDescription?: string | ... 1 more ... | undefined; }'.
+server/seed.ts(54,3): error TS2741: Property 'licensePlate' is missing in type '{ name: string; category: string; brand: string; model: string; year: number; pricePerDay: string; transmission: string; fuel: string; seats: number; imageUrl: string; available: true; isInvestorVehicle: false; ownerId: null; investorPercentage: number; }' but required in type '{ name: string; brand: string; category: string; model: string; year: number; pricePerDay: string; transmission: string; fuel: string; seats: number; licensePlate: string; monthlyPrice?: string | null | undefined; ... 42 more ...; damageDescription?: string | ... 1 more ... | undefined; }'.
+server/seed.ts(70,3): error TS2741: Property 'licensePlate' is missing in type '{ name: string; category: string; brand: string; model: string; year: number; pricePerDay: string; transmission: string; fuel: string; seats: number; imageUrl: string; available: true; isInvestorVehicle: false; ownerId: null; investorPercentage: number; }' but required in type '{ name: string; brand: string; category: string; model: string; year: number; pricePerDay: string; transmission: string; fuel: string; seats: number; licensePlate: string; monthlyPrice?: string | null | undefined; ... 42 more ...; damageDescription?: string | ... 1 more ... | undefined; }'.
+server/seed.ts(86,3): error TS2741: Property 'licensePlate' is missing in type '{ name: string; category: string; brand: string; model: string; year: number; pricePerDay: string; transmission: string; fuel: string; seats: number; imageUrl: string; available: true; isInvestorVehicle: false; ownerId: null; investorPercentage: number; }' but required in type '{ name: string; brand: string; category: string; model: string; year: number; pricePerDay: string; transmission: string; fuel: string; seats: number; licensePlate: string; monthlyPrice?: string | null | undefined; ... 42 more ...; damageDescription?: string | ... 1 more ... | undefined; }'.
+server/seed.ts(116,36): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(value: { name: string | SQL<unknown> | Placeholder<string, any>; brand: string | SQL<unknown> | Placeholder<string, any>; category: string | SQL<unknown> | Placeholder<...>; ... 51 more ...; damageDescription?: string | ... 3 more ... | undefined; }): PgInsertBase<...>', gave the following error.
+    Argument of type '{ name: string; brand: string; category: string; model: string; year: number; pricePerDay: string; transmission: string; fuel: string; seats: number; licensePlate: string; monthlyPrice?: string | null | undefined; ... 42 more ...; damageDescription?: string | ... 1 more ... | undefined; }[]' is not assignable to parameter of type '{ name: string | SQL<unknown> | Placeholder<string, any>; brand: string | SQL<unknown> | Placeholder<string, any>; category: string | SQL<unknown> | Placeholder<string, any>; ... 51 more ...; damageDescription?: string | ... 3 more ... | undefined; }'.
+      Type '{ name: string; brand: string; category: string; model: string; year: number; pricePerDay: string; transmission: string; fuel: string; seats: number; licensePlate: string; monthlyPrice?: string | null | undefined; ... 42 more ...; damageDescription?: string | ... 1 more ... | undefined; }[]' is missing the following properties from type '{ name: string | SQL<unknown> | Placeholder<string, any>; brand: string | SQL<unknown> | Placeholder<string, any>; category: string | SQL<unknown> | Placeholder<string, any>; ... 51 more ...; damageDescription?: string | ... 3 more ... | undefined; }': name, brand, category, model, and 6 more.
+  Overload 2 of 2, '(values: { name: string | SQL<unknown> | Placeholder<string, any>; brand: string | SQL<unknown> | Placeholder<string, any>; category: string | SQL<unknown> | Placeholder<...>; ... 51 more ...; damageDescription?: string | ... 3 more ... | undefined; }[]): PgInsertBase<...>', gave the following error.
+    Argument of type '{ name: string; brand: string; category: string; model: string; year: number; pricePerDay: string; transmission: string; fuel: string; seats: number; licensePlate: string; monthlyPrice?: string | null | undefined; ... 42 more ...; damageDescription?: string | ... 1 more ... | undefined; }[]' is not assignable to parameter of type '{ name: string | SQL<unknown> | Placeholder<string, any>; brand: string | SQL<unknown> | Placeholder<string, any>; category: string | SQL<unknown> | Placeholder<string, any>; ... 51 more ...; damageDescription?: string | ... 3 more ... | undefined; }[]'.
+      Type '{ name: string; brand: string; category: string; model: string; year: number; pricePerDay: string; transmission: string; fuel: string; seats: number; licensePlate: string; monthlyPrice?: string | null | undefined; ... 42 more ...; damageDescription?: string | ... 1 more ... | undefined; }' is not assignable to type '{ name: string | SQL<unknown> | Placeholder<string, any>; brand: string | SQL<unknown> | Placeholder<string, any>; category: string | SQL<unknown> | Placeholder<string, any>; ... 51 more ...; damageDescription?: string | ... 3 more ... | undefined; }'.
+        Types of property 'imageUrl' are incompatible.
+          Type 'string | null | undefined' is not assignable to type 'string | SQL<unknown> | Placeholder<string, any>'.
+            Type 'undefined' is not assignable to type 'string | SQL<unknown> | Placeholder<string, any>'.
+server/storage.ts(240,8): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(value: { name: string | SQL<unknown> | Placeholder<string, any>; brand: string | SQL<unknown> | Placeholder<string, any>; category: string | SQL<unknown> | Placeholder<...>; ... 51 more ...; damageDescription?: string | ... 3 more ... | undefined; }): PgInsertBase<...>', gave the following error.
+    Argument of type '{ available: boolean; isInvestorVehicle: boolean; ownerId: any; investorPercentage: any; name: string; brand: string; category: string; model: string; year: number; pricePerDay: string; transmission: string; ... 42 more ...; damageDescription?: string | ... 1 more ... | undefined; }' is not assignable to parameter of type '{ name: string | SQL<unknown> | Placeholder<string, any>; brand: string | SQL<unknown> | Placeholder<string, any>; category: string | SQL<unknown> | Placeholder<string, any>; ... 51 more ...; damageDescription?: string | ... 3 more ... | undefined; }'.
+      Types of property 'imageUrl' are incompatible.
+        Type 'string | null | undefined' is not assignable to type 'string | SQL<unknown> | Placeholder<string, any>'.
+          Type 'undefined' is not assignable to type 'string | SQL<unknown> | Placeholder<string, any>'.
+  Overload 2 of 2, '(values: { name: string | SQL<unknown> | Placeholder<string, any>; brand: string | SQL<unknown> | Placeholder<string, any>; category: string | SQL<unknown> | Placeholder<...>; ... 51 more ...; damageDescription?: string | ... 3 more ... | undefined; }[]): PgInsertBase<...>', gave the following error.
+    Object literal may only specify known properties, and 'available' does not exist in type '{ name: string | SQL<unknown> | Placeholder<string, any>; brand: string | SQL<unknown> | Placeholder<string, any>; category: string | SQL<unknown> | Placeholder<string, any>; ... 51 more ...; damageDescription?: string | ... 3 more ... | undefined; }[]'.
+server/storage.ts(302,12): error TS2352: Conversion of type '{ id: string; vehicleId: string | null; customerId: string | null; customerName: string; customerEmail: string; customerPhone: string; customerCpf: string; driverLicense: string | null; ... 40 more ...; selectedPlanIds: string[] | null; }[]' to type 'Promise<{ id: string; status: string; createdAt: Date; isNegativado: boolean; street: string | null; complement: string | null; neighborhood: string | null; city: string | null; state: string | null; ... 54 more ...; priceBeforeDiscount: string | null; }[]>' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, convert the expression to 'unknown' first.
+  Type '{ id: string; vehicleId: string | null; customerId: string | null; customerName: string; customerEmail: string; customerPhone: string; customerCpf: string; driverLicense: string | null; ... 40 more ...; selectedPlanIds: string[] | null; }[]' is missing the following properties from type 'Promise<{ id: string; status: string; createdAt: Date; isNegativado: boolean; street: string | null; complement: string | null; neighborhood: string | null; city: string | null; state: string | null; ... 54 more ...; priceBeforeDiscount: string | null; }[]>': then, catch, finally, [Symbol.toStringTag]
+server/storage.ts(365,8): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(value: { customerName: string | SQL<unknown> | Placeholder<string, any>; customerEmail: string | SQL<unknown> | Placeholder<string, any>; customerPhone: string | ... 1 more ... | Placeholder<...>; ... 60 more ...; priceBeforeDiscount?: string | ... 3 more ... | undefined; }): PgInsertBase<...>', gave the following error.
+    Argument of type '{ totalPrice: string; status: "active" | "pending" | "approved" | "completed" | "cancelled"; isNegativado: boolean; customerName: string; customerEmail: string; customerPhone: string; ... 53 more ...; selectedPlanIds?: string[] | ... 1 more ... | undefined; }' is not assignable to parameter of type '{ customerName: string | SQL<unknown> | Placeholder<string, any>; customerEmail: string | SQL<unknown> | Placeholder<string, any>; customerPhone: string | SQL<...> | Placeholder<...>; ... 60 more ...; priceBeforeDiscount?: string | ... 3 more ... | undefined; }'.
+      Types of property 'startDate' are incompatible.
+        Type 'Date | undefined' is not assignable to type 'SQL<unknown> | Date | Placeholder<string, any>'.
+          Type 'undefined' is not assignable to type 'SQL<unknown> | Date | Placeholder<string, any>'.
+  Overload 2 of 2, '(values: { customerName: string | SQL<unknown> | Placeholder<string, any>; customerEmail: string | SQL<unknown> | Placeholder<string, any>; customerPhone: string | ... 1 more ... | Placeholder<...>; ... 60 more ...; priceBeforeDiscount?: string | ... 3 more ... | undefined; }[]): PgInsertBase<...>', gave the following error.
+    Object literal may only specify known properties, and 'totalPrice' does not exist in type '{ customerName: string | SQL<unknown> | Placeholder<string, any>; customerEmail: string | SQL<unknown> | Placeholder<string, any>; customerPhone: string | SQL<...> | Placeholder<...>; ... 60 more ...; priceBeforeDiscount?: string | ... 3 more ... | undefined; }[]'.
+server/storage.ts(548,9): error TS2393: Duplicate function implementation.
+server/storage.ts(1436,9): error TS2393: Duplicate function implementation.

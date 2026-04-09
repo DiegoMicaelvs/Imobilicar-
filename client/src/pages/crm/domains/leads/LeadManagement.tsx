@@ -27,6 +27,7 @@ export default function LeadManagement() {
   const [selectedLead, setSelectedLead] = useState<Lead | null>(null);
   const [filterStatus, setFilterStatus] = useState<string>("all");
   const [searchTerm, setSearchTerm] = useState<string>("");
+  const [visibleCount, setVisibleCount] = useState<number>(50);
   const { toast } = useToast();
 
   // Use CrmData context instead of local useQuery
@@ -272,6 +273,9 @@ export default function LeadManagement() {
     return matchesStatus && matchesSearch;
   });
 
+  const totalFiltered = filteredLeads?.length || 0;
+  const visibleLeads = filteredLeads?.slice(0, visibleCount);
+
   return (
     <>
       <Card>
@@ -279,7 +283,7 @@ export default function LeadManagement() {
           <div>
             <CardTitle>Leads</CardTitle>
             <CardDescription>
-              Gestão de leads e oportunidades
+              Gestão de leads e oportunidades. Mostrando <strong>{visibleLeads?.length || 0}</strong> de <strong>{totalFiltered}</strong> leads.
             </CardDescription>
           </div>
           <div className="flex items-center gap-2">
@@ -335,9 +339,9 @@ export default function LeadManagement() {
             <div className="text-center py-8">
               <p className="text-muted-foreground">Carregando leads...</p>
             </div>
-          ) : filteredLeads && filteredLeads.length > 0 ? (
+          ) : visibleLeads && visibleLeads.length > 0 ? (
             <div className="space-y-4">
-              {filteredLeads.map((lead: any) => {
+              {visibleLeads.map((lead: any) => {
                 // Find vehicle if vehicleId exists
                 const vehicleOfInterest = lead.vehicleId
                   ? vehicles?.find((v: any) => v.id === lead.vehicleId)
@@ -499,6 +503,18 @@ export default function LeadManagement() {
                   </Card>
                 );
               })}
+              
+              {visibleCount < totalFiltered && (
+                <div className="flex justify-center pt-6 pb-2">
+                  <Button 
+                    variant="outline" 
+                    onClick={() => setVisibleCount(prev => prev + 50)}
+                    className="w-full sm:w-auto hover-elevate transition-all"
+                  >
+                    Carregar Mais (Mostrando {visibleCount} de {totalFiltered})
+                  </Button>
+                </div>
+              )}
             </div>
           ) : (
             <div className="text-center py-12">

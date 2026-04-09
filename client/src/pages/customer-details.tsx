@@ -425,7 +425,7 @@ export default function CustomerDetails() {
                                 </div>
                                 <div>
                                   <span className="text-muted-foreground text-xs">Data de Início:</span>
-                                  <span className="ml-1">{format(new Date(financing.startDate), "dd/MM/yyyy", { locale: ptBR })}</span>
+                                  <span className="ml-1">{financing.startDate ? format(new Date(financing.startDate), "dd/MM/yyyy", { locale: ptBR }) : "Não definida"}</span>
                                 </div>
                                 <div>
                                   <span className="text-muted-foreground text-xs">Status:</span>

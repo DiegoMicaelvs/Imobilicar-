@@ -54,13 +54,13 @@ export default function CustomerPortal() {
   }, [setLocation]);
 
   // Buscar aluguéis do cliente
-  const { data: rentals = [], isLoading: rentalsLoading } = useQuery({
+  const { data: rentals = [], isLoading: rentalsLoading } = useQuery<any[]>({
     queryKey: ["/api/rentals"],
     enabled: !!customer,
   });
 
   // Buscar veículos disponíveis
-  const { data: vehicles = [], isLoading: vehiclesLoading } = useQuery({
+  const { data: vehicles = [], isLoading: vehiclesLoading } = useQuery<any[]>({
     queryKey: ["/api/vehicles"],
     enabled: !!customer,
   });
@@ -68,13 +68,13 @@ export default function CustomerPortal() {
   // Buscar veículos do investidor (se aplicável)
   // Usar customerId (para novos investidores em admin_users) ou id (para investidores antigos em customers)
   const investorOwnerId = customer?.customerId || customer?.id;
-  const { data: investorVehicles = [], isLoading: investorVehiclesLoading } = useQuery({
+  const { data: investorVehicles = [], isLoading: investorVehiclesLoading } = useQuery<any[]>({
     queryKey: [`/api/vehicles/investor/${investorOwnerId}`],
     enabled: !!investorOwnerId,
   });
 
   // Buscar quotas de investimento para calcular dividendos
-  const { data: investmentQuotas = [] } = useQuery({
+  const { data: investmentQuotas = [] } = useQuery<any[]>({
     queryKey: ["/api/investment-quotas"],
     enabled: !!customer?.id,
   });
@@ -135,9 +135,9 @@ export default function CustomerPortal() {
         if (vehicle.fipeValue && investmentQuotas && Array.isArray(investmentQuotas)) {
           const fipeValue = parseFloat(vehicle.fipeValue);
           const matchingQuota = investmentQuotas.find((quota: any) => {
-            const minValue = parseFloat(quota.minFipeValue);
-            const maxValue = parseFloat(quota.maxFipeValue);
-            const categoryMatch = quota.vehicleCategory === vehicle.category;
+            const minValue = parseFloat(quota.minValue);
+            const maxValue = parseFloat(quota.maxValue);
+            const categoryMatch = quota.category === vehicle.category;
             return categoryMatch && fipeValue >= minValue && fipeValue <= maxValue;
           });
           
@@ -175,7 +175,11 @@ export default function CustomerPortal() {
     
     const createdDate = new Date(customer.createdAt);
     const today = new Date();
-    const paymentDay = customer.paymentDate;
+    // Parsear o dia de pagamento (pode ser "16" ou "16/20/30")
+    const paymentDayStr = customer.paymentDate ? String(customer.paymentDate).split('/')[0] : null;
+    const paymentDay = paymentDayStr ? parseInt(paymentDayStr) : null;
+    
+    if (!paymentDay) return { total: 0, paymentsCount: 0 };
     
     // Contar quantos pagamentos já deveriam ter sido feitos
     let paymentsCount = 0;
@@ -215,9 +219,9 @@ export default function CustomerPortal() {
     if (vehicle.fipeValue && investmentQuotas && Array.isArray(investmentQuotas)) {
       const fipeValue = parseFloat(vehicle.fipeValue);
       const matchingQuota = investmentQuotas.find((quota: any) => {
-        const minValue = parseFloat(quota.minFipeValue);
-        const maxValue = parseFloat(quota.maxFipeValue);
-        const categoryMatch = quota.vehicleCategory === vehicle.category;
+        const minValue = parseFloat(quota.minValue);
+        const maxValue = parseFloat(quota.maxValue);
+        const categoryMatch = quota.category === vehicle.category;
         return categoryMatch && fipeValue >= minValue && fipeValue <= maxValue;
       });
       
@@ -333,11 +337,21 @@ export default function CustomerPortal() {
                 // Agregar datas de pagamento de todos os veículos
                 const vehiclePaymentDates = (investorVehicles || [])
                   .map((v: any) => v.paymentDate)
-                  .filter((d: any) => d != null && d > 0);
-                const allPaymentDates = vehiclePaymentDates.length > 0 
-                  ? vehiclePaymentDates 
-                  : (customer.paymentDate ? [customer.paymentDate] : []);
-                const uniquePaymentDates = [...new Set(allPaymentDates)].sort((a: number, b: number) => a - b);
+                  .filter((d: any) => d != null);
+                
+                // Tratar datas que podem ser strings como "16/20/30"
+                const allDays: number[] = [];
+                const rawDates = vehiclePaymentDates.length > 0 ? vehiclePaymentDates : (customer.paymentDate ? [customer.paymentDate] : []);
+                
+                rawDates.forEach((d: any) => {
+                  const parts = String(d).split('/');
+                  parts.forEach(p => {
+                    const day = parseInt(p.trim());
+                    if (!isNaN(day)) allDays.push(day);
+                  });
+                });
+
+                const uniquePaymentDates = [...new Set(allDays)].sort((a: number, b: number) => a - b);
                 const paymentDatesFormatted = uniquePaymentDates.length > 0 
                   ? `Dia ${uniquePaymentDates.join('/')}`
                   : null;

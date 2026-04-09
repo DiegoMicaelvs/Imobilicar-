@@ -214,7 +214,7 @@ export default function InvestorDetails() {
       );
       
       if (matchingQuota) {
-        totalDividend += Number(matchingQuota.dividendAmount);
+        totalDividend += Number(matchingQuota.minDividend);
       }
     });
     
@@ -596,7 +596,7 @@ export default function InvestorDetails() {
         emergencyContact: emergencyContact || null,
         driverLicense: driverLicense || null,
         isMainDriver,
-        paymentDate: paymentDate,
+        paymentDate: paymentDate?.toString() || null,
         bonusDate: bonusDate || null,
         bonusValue: bonusValue || null,
         street: street || null,
@@ -739,7 +739,7 @@ export default function InvestorDetails() {
                         setEmergencyContact(investor.emergencyContact || "");
                         setDriverLicense(investor.driverLicense || "");
                         setIsMainDriver(investor.isMainDriver ?? true);
-                        setPaymentDate(investor.paymentDate ?? null);
+                        setPaymentDate(investor.paymentDate ? parseInt(investor.paymentDate) : null);
                         setBonusDate(investor.bonusDate || "");
                         setBonusValue(investor.bonusValue || "");
                         setStreet(investor.street || "");
@@ -2452,7 +2452,12 @@ export default function InvestorDetails() {
                     <FormItem className="col-span-2">
                       <FormLabel>URL da Imagem</FormLabel>
                       <FormControl>
-                        <Input placeholder="https://exemplo.com/imagem.jpg" {...field} data-testid="input-vehicle-image" />
+                        <Input 
+                          placeholder="https://exemplo.com/imagem.jpg" 
+                          {...field} 
+                          value={field.value || ""}
+                          data-testid="input-vehicle-image" 
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -2474,7 +2479,7 @@ export default function InvestorDetails() {
                         <span className="font-medium text-foreground">{category}</span>, a Imobilicar pagará:
                       </p>
                       <div className="text-2xl font-bold text-primary" data-testid="dividend-amount">
-                        R$ {Number(matchingQuota.dividendAmount).toFixed(2)}
+                        R$ {Number(matchingQuota.minDividend).toFixed(2)}
                       </div>
                       <p className="text-xs text-muted-foreground mt-1">
                         Valor mensal fixo pago pela Imobilicar ao investidor

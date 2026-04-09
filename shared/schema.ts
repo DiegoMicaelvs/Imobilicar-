@@ -298,6 +298,10 @@ export type RentalInspectionItem = typeof rentalInspectionItems.$inferSelect;
 export type InsertVehicleRequest = z.infer<typeof insertVehicleRequestSchema>;
 export type VehicleRequest = typeof vehicleRequests.$inferSelect;
 
+// Alias para compatibilidade com código antigo
+export type Investor = Customer;
+export type InsertInvestor = InsertCustomer;
+
 export const customers = pgTable("customers", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
   number: text("number"),

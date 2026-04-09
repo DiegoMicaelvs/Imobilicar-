@@ -48,17 +48,16 @@ app.use((req, res, next) => {
       serveStatic(app);
     }
 
-  // ALWAYS serve the app on the port specified in the environment variable PORT
-  // Other ports are firewalled. Default to 5000 if not specified.
-  // this serves both the API and the client.
-  // It is the only port that is not firewalled.
-  const port = parseInt(process.env.PORT || '5000', 10);
-  server.listen({
-    port,
-    host: "0.0.0.0",
-  }, () => {
-    log(`serving on port ${port}`);
-  });
+  // Only start the server if we're not running as a Vercel serverless function
+  if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
+    const port = parseInt(process.env.PORT || '5000', 10);
+    server.listen({
+      port,
+      host: "0.0.0.0",
+    }, () => {
+      log(`serving on port ${port}`);
+    });
+  }
 })();
 
 // Export app for Vercel

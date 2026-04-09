@@ -1,9 +1,9 @@
-import { createContext, useContext, useState, ReactNode } from 'react';
+import { createContext, useContext, useState, ReactNode, Dispatch, SetStateAction } from 'react';
 
 interface RentalWizardContextType {
   // Wizard navigation
   currentStep: number;
-  setCurrentStep: (step: number) => void;
+  setCurrentStep: Dispatch<SetStateAction<number>>;
   
   // Customer data
   customerData: any;

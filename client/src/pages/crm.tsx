@@ -5401,7 +5401,7 @@ function CRMContent() {
                                       setApprovalData({
                                         pricePerDay: "",
                                         monthlyPrice: "",
-                                        customDividend: matchingQuota?.dividendAmount || ""
+                                        customDividend: matchingQuota?.minDividend || ""
                                       });
                                       setApproveRequestDialogOpen(true);
                                     }}

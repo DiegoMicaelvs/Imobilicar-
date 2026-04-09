@@ -1112,16 +1112,16 @@ export default function RentalWizard() {
               <div className="space-y-2">
                 <label className="text-sm font-medium">Comprovante (Opcional)</label>
                 <FileUploadZone
-                  currentFile={paymentData?.proofFileName ? {
-                    name: paymentData.proofFileName,
-                    url: paymentData.proofUrl
+                  fileData={paymentData?.proofFileName ? {
+                    fileName: paymentData.proofFileName,
+                    fileUrl: paymentData.proofUrl
                   } : null}
                   onFileChange={(fileData) => {
                     if (fileData) {
                       setPaymentData({
                         ...paymentData,
-                        proofUrl: fileData.url,
-                        proofFileName: fileData.name
+                        proofUrl: fileData.fileUrl,
+                        proofFileName: fileData.fileName
                       });
                     } else {
                       const newPaymentData = {...paymentData};
@@ -1142,7 +1142,7 @@ export default function RentalWizard() {
       <div className="flex justify-between mt-8">
         <Button
           variant="outline"
-          onClick={() => setCurrentStep(prev => Math.max(1, prev - 1))}
+          onClick={() => setCurrentStep((prev: number) => Math.max(1, prev - 1))}
           disabled={currentStep === 1}
           data-testid="button-wizard-prev"
         >
@@ -1154,7 +1154,7 @@ export default function RentalWizard() {
           <Button
             onClick={() => {
               if (validateStep(currentStep)) {
-                setCurrentStep(prev => Math.min(5, prev + 1));
+                setCurrentStep((prev: number) => Math.min(5, prev + 1));
               }
             }}
             data-testid="button-wizard-next"

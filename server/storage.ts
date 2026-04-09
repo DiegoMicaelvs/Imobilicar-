@@ -680,7 +680,7 @@ export class DatabaseStorage implements IStorage {
 
   // Leads
   async getLeads(): Promise<Lead[]> {
-    return await db.select().from(leads).orderBy(desc(leads.createdAt));
+    return await db.select().from(leads).orderBy(desc(leads.id)).limit(200);
   }
 
   async getLead(id: string): Promise<Lead | undefined> {

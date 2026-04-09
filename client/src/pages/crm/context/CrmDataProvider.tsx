@@ -73,42 +73,46 @@ interface CrmDataContextType {
 const CrmDataContext = createContext<CrmDataContextType | undefined>(undefined);
 
 export function CrmDataProvider({ children }: { children: ReactNode }) {
-  // All queries
-  const { data: leads, isLoading: leadsLoading, isError: leadsError } = useQuery<Lead[]>({
-    queryKey: ['/api/leads'],
+  // Single master query to prevent HTTP connection starvation on mobile (12 concurrent UI requests)
+  const { data: dashboardData, isLoading: dashboardLoading, isError: dashboardError } = useQuery<any>({
+    queryKey: ['/api/crm/dashboard'],
+    staleTime: 30000, // 30 seconds to prevent aggressive refreshing when moving files
   });
 
-  const { data: rentals, isLoading: rentalsLoading, isError: rentalsError } = useQuery<Rental[]>({
+  const leads = dashboardData?.leads;
+  const vehicles = dashboardData?.vehicles;
+  const financings = dashboardData?.financings;
+  const customers = dashboardData?.customers;
+  const adminUsers = dashboardData?.adminUsers;
+  const templates = dashboardData?.templates;
+  const investmentQuotas = dashboardData?.investmentQuotas;
+  const investors = dashboardData?.investors;
+  const tradeInVehicles = dashboardData?.tradeInVehicles;
+  const plans = dashboardData?.plans;
+
+  // We keep polling queries alive but they can fall back to dashboardData
+  const rentalsQuery = useQuery<Rental[]>({
     queryKey: ['/api/rentals'],
     refetchInterval: 30000,
   });
+  const rentals = rentalsQuery.data || dashboardData?.rentals;
+  const rentalsLoading = rentalsQuery.isLoading && dashboardLoading;
+  const rentalsError = rentalsQuery.isError;
 
-  const { data: vehicles, isLoading: vehiclesLoading } = useQuery<any[]>({
-    queryKey: ['/api/vehicles'],
+  const vehicleRequestsQuery = useQuery<any[]>({
+    queryKey: ['/api/vehicle-requests'],
+    refetchInterval: 30000,
   });
+  const vehicleRequests = vehicleRequestsQuery.data || dashboardData?.vehicleRequests;
+  const vehicleRequestsLoading = vehicleRequestsQuery.isLoading && dashboardLoading;
 
-  const { data: financings, isLoading: financingsLoading } = useQuery<any[]>({
-    queryKey: ['/api/financings'],
-  });
-
-  const { data: customers, isLoading: customersLoading } = useQuery<any[]>({
-    queryKey: ['/api/customers'],
-  });
-
+  // Audit Logs and Customer Events remain as manual queries
   const auditLogsQuery = useQuery<any[]>({
     queryKey: ['/api/audit-logs'],
     enabled: false,
   });
   const auditLogs = auditLogsQuery.data;
   const auditLogsLoading = auditLogsQuery.isLoading;
-
-  const { data: adminUsers, isLoading: adminUsersLoading } = useQuery<any[]>({
-    queryKey: ['/api/admin/users'],
-  });
-
-  const { data: templates, isLoading: templatesLoading } = useQuery<any[]>({
-    queryKey: ['/api/contract-templates'],
-  });
 
   const customerEventsQuery = useQuery<any[]>({
     queryKey: ['/api/customer-events'],
@@ -117,59 +121,31 @@ export function CrmDataProvider({ children }: { children: ReactNode }) {
   const customerEvents = customerEventsQuery.data;
   const customerEventsLoading = customerEventsQuery.isLoading;
 
-  const { data: investmentQuotas, isLoading: quotasLoading } = useQuery<any[]>({
-    queryKey: ['/api/investment-quotas'],
-  });
-
-  const { data: investors, isLoading: investorsLoading } = useQuery<any[]>({
-    queryKey: ['/api/investors'],
-  });
-
-  const { data: tradeInVehicles, isLoading: tradeInVehiclesLoading } = useQuery<any[]>({
-    queryKey: ['/api/trade-in-vehicles'],
-  });
-
-  const { data: vehicleRequests, isLoading: vehicleRequestsLoading } = useQuery<any[]>({
-    queryKey: ['/api/vehicle-requests'],
-    refetchInterval: 30000,
-  });
-
-  const { data: plans, isLoading: plansLoading } = useQuery<any[]>({
-    queryKey: ['/api/rental-plans'],
-  });
-
-  // Invalidation helpers
+  // Invalidation helpers - we trigger the master dashboard query refresh
+  const triggerMasterRefresh = () => queryClient.invalidateQueries({ queryKey: ['/api/crm/dashboard'] });
+  
   const invalidate = {
-    leads: () => queryClient.invalidateQueries({ queryKey: ['/api/leads'] }),
-    rentals: () => queryClient.invalidateQueries({ queryKey: ['/api/rentals'] }),
-    vehicles: () => queryClient.invalidateQueries({ queryKey: ['/api/vehicles'] }),
-    financings: () => queryClient.invalidateQueries({ queryKey: ['/api/financings'] }),
-    customers: () => queryClient.invalidateQueries({ queryKey: ['/api/customers'] }),
-    auditLogs: () => queryClient.invalidateQueries({ queryKey: ['/api/audit-logs'] }),
-    adminUsers: () => queryClient.invalidateQueries({ queryKey: ['/api/admin/users'] }),
-    templates: () => queryClient.invalidateQueries({ queryKey: ['/api/contract-templates'] }),
-    customerEvents: () => queryClient.invalidateQueries({ queryKey: ['/api/customer-events'] }),
-    quotas: () => queryClient.invalidateQueries({ queryKey: ['/api/investment-quotas'] }),
-    investors: () => queryClient.invalidateQueries({ queryKey: ['/api/investors'] }),
-    tradeInVehicles: () => queryClient.invalidateQueries({ queryKey: ['/api/trade-in-vehicles'] }),
-    vehicleRequests: () => queryClient.invalidateQueries({ queryKey: ['/api/vehicle-requests'] }),
-    plans: () => queryClient.invalidateQueries({ queryKey: ['/api/rental-plans'] }),
+    leads: async () => { triggerMasterRefresh(); },
+    rentals: async () => { queryClient.invalidateQueries({ queryKey: ['/api/rentals'] }); triggerMasterRefresh(); },
+    vehicles: async () => { triggerMasterRefresh(); },
+    financings: async () => { triggerMasterRefresh(); },
+    customers: async () => { triggerMasterRefresh(); },
+    auditLogs: async () => { queryClient.invalidateQueries({ queryKey: ['/api/audit-logs'] }); },
+    adminUsers: async () => { triggerMasterRefresh(); },
+    templates: async () => { triggerMasterRefresh(); },
+    customerEvents: async () => { queryClient.invalidateQueries({ queryKey: ['/api/customer-events'] }); },
+    quotas: async () => { triggerMasterRefresh(); },
+    investors: async () => { triggerMasterRefresh(); },
+    tradeInVehicles: async () => { triggerMasterRefresh(); },
+    vehicleRequests: async () => { queryClient.invalidateQueries({ queryKey: ['/api/vehicle-requests'] }); triggerMasterRefresh(); },
+    plans: async () => { triggerMasterRefresh(); },
     all: async () => {
       await Promise.all([
-        queryClient.invalidateQueries({ queryKey: ['/api/leads'] }),
+        queryClient.invalidateQueries({ queryKey: ['/api/crm/dashboard'] }),
         queryClient.invalidateQueries({ queryKey: ['/api/rentals'] }),
-        queryClient.invalidateQueries({ queryKey: ['/api/vehicles'] }),
-        queryClient.invalidateQueries({ queryKey: ['/api/financings'] }),
-        queryClient.invalidateQueries({ queryKey: ['/api/customers'] }),
         queryClient.invalidateQueries({ queryKey: ['/api/audit-logs'] }),
-        queryClient.invalidateQueries({ queryKey: ['/api/admin/users'] }),
-        queryClient.invalidateQueries({ queryKey: ['/api/contract-templates'] }),
         queryClient.invalidateQueries({ queryKey: ['/api/customer-events'] }),
-        queryClient.invalidateQueries({ queryKey: ['/api/investment-quotas'] }),
-        queryClient.invalidateQueries({ queryKey: ['/api/investors'] }),
-        queryClient.invalidateQueries({ queryKey: ['/api/trade-in-vehicles'] }),
         queryClient.invalidateQueries({ queryKey: ['/api/vehicle-requests'] }),
-        queryClient.invalidateQueries({ queryKey: ['/api/rental-plans'] }),
       ]);
     },
   };
@@ -194,23 +170,23 @@ export function CrmDataProvider({ children }: { children: ReactNode }) {
       customerEvents: () => customerEventsQuery.refetch(),
     },
     isLoading: {
-      leads: leadsLoading,
+      leads: dashboardLoading,
       rentals: rentalsLoading,
-      vehicles: vehiclesLoading,
-      financings: financingsLoading,
-      customers: customersLoading,
+      vehicles: dashboardLoading,
+      financings: dashboardLoading,
+      customers: dashboardLoading,
       auditLogs: auditLogsLoading,
-      adminUsers: adminUsersLoading,
-      templates: templatesLoading,
+      adminUsers: dashboardLoading,
+      templates: dashboardLoading,
       customerEvents: customerEventsLoading,
-      quotas: quotasLoading,
-      investors: investorsLoading,
-      tradeInVehicles: tradeInVehiclesLoading,
+      quotas: dashboardLoading,
+      investors: dashboardLoading,
+      tradeInVehicles: dashboardLoading,
       vehicleRequests: vehicleRequestsLoading,
-      plans: plansLoading,
+      plans: dashboardLoading,
     },
     isError: {
-      leads: leadsError,
+      leads: dashboardError,
       rentals: rentalsError,
     },
     invalidate,

@@ -2605,6 +2605,31 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  app.get("/api/crm/dashboard", async (_req, res) => {
+    try {
+      const [
+        leads, rentals, vehicles, financings, customers,
+        adminUsers, templates, investmentQuotas, investors,
+        tradeInVehicles, vehicleRequests, plans
+      ] = await Promise.all([
+        storage.getLeads(), storage.getRentals(), storage.getVehicles(),
+        storage.getFinancings(), storage.getCustomers(), storage.getAdminUsers(),
+        storage.getContractTemplates(), storage.getInvestmentQuotas(),
+        storage.getInvestors(), storage.getTradeInVehicles(),
+        storage.getVehicleRequests(), storage.getRentalPlans()
+      ]);
+
+      res.json({
+        leads, rentals, vehicles, financings, customers,
+        adminUsers, templates, investmentQuotas, investors,
+        tradeInVehicles, vehicleRequests, plans
+      });
+    } catch (e) {
+      console.error("Dashboard DB fetch error:", e);
+      res.status(500).json({ error: "Failed to fetch dashboard data" });
+    }
+  });
+
   app.get("/api/leads", async (_req, res) => {
     try {
       const leads = await storage.getLeads();

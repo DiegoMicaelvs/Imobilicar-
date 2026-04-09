@@ -1,5 +1,5 @@
 import { eq, and, desc, sql } from "drizzle-orm";
-import { db } from "./db";
+import { db } from "./db.js";
 import {
   vehicles,
   rentals,
@@ -62,7 +62,7 @@ import {
   type InsertFinancingProposal,
   type OperationalExpense,
   type InsertOperationalExpense,
-} from "@shared/schema";
+} from "../shared/schema.js";
 
 export interface IStorage {
   getVehicles(): Promise<Vehicle[]>;

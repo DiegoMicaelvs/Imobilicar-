@@ -1,7 +1,7 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
-import { storage } from "./storage";
-import { insertVehicleSchema, updateVehicleSchema, insertRentalSchema, insertRentalInspectionItemSchema, insertLeadSchema, insertInteractionSchema, insertVehicleRequestSchema, insertCustomerSchema, updateCustomerSchema, insertCustomerEventSchema, insertInvestorEventSchema, insertInvestmentQuotaSchema, insertInvestorPaymentSchema, insertFinancingSchema, updateFinancingSchema, insertVehicleInspectionSchema, insertAdminUserSchema, insertContractTemplateSchema, updateContractTemplateSchema, insertRentalPlanSchema, updateRentalPlanSchema, insertFinancingProposalSchema, type VehicleRequest } from "@shared/schema";
+import { storage } from "./storage.js";
+import { insertVehicleSchema, updateVehicleSchema, insertRentalSchema, insertRentalInspectionItemSchema, insertLeadSchema, insertInteractionSchema, insertVehicleRequestSchema, insertCustomerSchema, updateCustomerSchema, insertCustomerEventSchema, insertInvestorEventSchema, insertInvestmentQuotaSchema, insertInvestorPaymentSchema, insertFinancingSchema, updateFinancingSchema, insertVehicleInspectionSchema, insertAdminUserSchema, insertContractTemplateSchema, updateContractTemplateSchema, insertRentalPlanSchema, updateRentalPlanSchema, insertFinancingProposalSchema, type VehicleRequest } from "../shared/schema.js";
 import { z } from "zod";
 import PDFDocument from "pdfkit";
 import { format } from "date-fns";

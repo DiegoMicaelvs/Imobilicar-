@@ -2200,7 +2200,7 @@ function CRMContent() {
 
       {/* Dialog de Nova Venda - Wizard multi-step */}
       <Dialog open={newSaleDialogOpen} onOpenChange={handleDialogClose}>
-        <DialogContent className="max-w-6xl max-h-[90vh] overflow-y-auto p-4 sm:p-6">
+        <DialogContent className="max-w-6xl max-h-[85vh] sm:max-h-[90vh] md:h-auto overflow-y-auto p-4 sm:p-6 w-[95vw] sm:w-full">
           <DialogHeader>
             <DialogTitle className="text-lg sm:text-xl">
               {saleType === "rental" ? "Nova Venda - Aluguel" : saleType === "investment" ? "Investimento" : "Nova Venda - Financiamento"}
@@ -5433,16 +5433,47 @@ function CRMContent() {
                 </Card>
               )}
 
-              <div className="md:hidden mb-2">
+              <div className="md:hidden flex items-center justify-between gap-2 mb-2 pt-2">
                 <Button
                   variant="ghost"
+                  size="sm"
                   onClick={() => setLocation("/")}
-                  className="gap-2 text-muted-foreground"
+                  className="gap-2 text-muted-foreground border border-transparent hover:border-border"
                   data-testid="button-back-home-mobile"
                 >
                   <ArrowLeft className="h-4 w-4" />
-                  <span className="text-sm">Voltar ao site</span>
+                  <span className="text-sm">Sair</span>
                 </Button>
+
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button size="sm" className="shadow-md hover-elevate transition-all" data-testid="button-new-sale-mobile">
+                      <Plus className="h-4 w-4 mr-2" />
+                      Nova Venda
+                      <ChevronDown className="h-3 w-3 ml-2 opacity-70" />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end" className="w-48">
+                    <DropdownMenuItem
+                      onClick={() => {
+                        setSaleType("rental");
+                        setNewSaleDialogOpen(true);
+                      }}
+                    >
+                      <Car className="h-4 w-4 mr-2 text-primary" />
+                      Aluguel
+                    </DropdownMenuItem>
+                    <DropdownMenuItem
+                      onClick={() => {
+                        setSaleType("financing");
+                        setNewSaleDialogOpen(true);
+                      }}
+                    >
+                      <DollarSign className="h-4 w-4 mr-2 text-green-600" />
+                      Financiamento
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
               </div>
               <div className="md:hidden w-full overflow-x-auto pb-2 mb-4 scrollbar-thin">
                 <div className="flex gap-1 p-1 bg-muted/50 rounded-lg w-max">
@@ -7319,15 +7350,16 @@ function CRMContent() {
 
                 <TabsContent value="eventos">
                   <Card>
-                    <CardHeader className="flex flex-row items-center justify-between gap-2 flex-wrap">
+                    <CardHeader className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                       <div>
                         <CardTitle>Eventos da Frota</CardTitle>
                         <CardDescription>
                           Todos os eventos do sistema: incidentes, sinistros, avarias, roubos, assistências e manutenções
                         </CardDescription>
                       </div>
-                      <div className="flex gap-2">
+                      <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto">
                         <Button
+                          className="flex-1 sm:flex-none"
                           onClick={() => {
                             setRegisterDamageDialogOpen(true);
                             setDamageFormData({
@@ -7344,6 +7376,7 @@ function CRMContent() {
                           Registrar Avaria
                         </Button>
                         <Button
+                          className="flex-1 sm:flex-none"
                           onClick={() => {
                             setEditingFleetEvent(null);
                             setVehicleSearchTerm("");

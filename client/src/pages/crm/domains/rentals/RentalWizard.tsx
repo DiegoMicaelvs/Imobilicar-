@@ -490,46 +490,68 @@ export default function RentalWizard() {
             )}
             
             {/* Vehicle Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {vehicles?.filter(v => v.available).map((vehicle: any) => (
-                <Card 
-                  key={vehicle.id}
-                  className={`cursor-pointer transition-all ${
-                    selectedVehicle?.id === vehicle.id 
-                      ? "border-primary bg-primary/5" 
-                      : "hover-elevate"
-                  }`}
-                  onClick={() => setSelectedVehicle(vehicle)}
-                  data-testid={`card-select-vehicle-${vehicle.id}`}
-                >
-                  <CardHeader>
-                    <div className="flex items-start justify-between">
-                      <div className="flex-1">
-                        <CardTitle className="text-base">{vehicle.name}</CardTitle>
-                        <CardDescription>{vehicle.brand} {vehicle.model}</CardDescription>
-                      </div>
-                      {selectedVehicle?.id === vehicle.id && (
-                        <div className="w-6 h-6 rounded-full bg-primary flex items-center justify-center">
-                          <Check className="h-4 w-4 text-primary-foreground" />
+            {!selectedVehicle ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {vehicles?.filter((v: any) => v.available !== false).map((vehicle: any) => (
+                  <Card 
+                    key={vehicle.id}
+                    className="cursor-pointer transition-all hover-elevate"
+                    onClick={() => setSelectedVehicle(vehicle)}
+                    data-testid={`card-select-vehicle-${vehicle.id}`}
+                  >
+                    <CardHeader>
+                      <div className="flex items-start justify-between">
+                        <div className="flex-1">
+                          <CardTitle className="text-base">{vehicle.name}</CardTitle>
+                          <CardDescription>{vehicle.brand} {vehicle.model}</CardDescription>
                         </div>
-                      )}
-                    </div>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-2">
-                      <div className="flex items-center justify-between text-sm">
-                        <span className="text-muted-foreground">Valor/dia:</span>
-                        <span className="font-semibold">R$ {Number(vehicle.pricePerDay).toLocaleString('pt-BR', {minimumFractionDigits: 2})}</span>
                       </div>
-                      <div className="flex gap-2 flex-wrap">
-                        <Badge variant="outline">{vehicle.category}</Badge>
-                        <Badge variant="outline">{vehicle.year}</Badge>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-2">
+                        <div className="flex items-center justify-between text-sm">
+                          <span className="text-muted-foreground">Valor/dia:</span>
+                          <span className="font-semibold">R$ {Number(vehicle.pricePerDay || 0).toLocaleString('pt-BR', {minimumFractionDigits: 2})}</span>
+                        </div>
+                        <div className="flex gap-2 flex-wrap">
+                          <Badge variant="outline">{vehicle.category}</Badge>
+                          <Badge variant="outline">{vehicle.year}</Badge>
+                        </div>
                       </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            ) : (
+              <Card className="border-primary bg-primary/5">
+                <CardHeader>
+                  <div className="flex items-start justify-between">
+                    <div className="flex-1">
+                      <CardTitle className="text-base flex items-center gap-2">
+                        <Check className="h-5 w-5 text-primary" />
+                        {selectedVehicle.name}
+                      </CardTitle>
+                      <CardDescription>{selectedVehicle.brand} {selectedVehicle.model}</CardDescription>
                     </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
+                    <Button variant="outline" size="sm" onClick={() => setSelectedVehicle(null)}>
+                      Trocar Veículo
+                    </Button>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-between text-sm">
+                      <span className="text-muted-foreground">Valor/dia:</span>
+                      <span className="font-semibold">R$ {Number(selectedVehicle.pricePerDay || 0).toLocaleString('pt-BR', {minimumFractionDigits: 2})}</span>
+                    </div>
+                    <div className="flex gap-2 flex-wrap">
+                      <Badge variant="outline">{selectedVehicle.category}</Badge>
+                      <Badge variant="outline">{selectedVehicle.year}</Badge>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            )}
             
             {selectedVehicle && (
               <>

@@ -309,17 +309,19 @@ export default function FinancingWizard() {
 
   // Filtrar veículos que NÃO estão em financiamentos ativos
   const availableVehicles = useMemo(() => {
-    if (!vehicles || !financings) return [];
+    if (!vehicles) return [];
+
+    const financingsList = financings || [];
 
     // IDs de veículos que já estão em financiamentos ativos
-    const vehiclesInActiveFinancing = financings
+    const vehiclesInActiveFinancing = financingsList
       .filter((f: any) => f.approvalStatus !== 'rejected' && f.approvalStatus !== 'completed' && f.approvalStatus !== 'cancelled')
       .map((f: any) => f.vehicleId);
 
     // Retornar apenas veículos disponíveis e que NÃO estão em financiamentos ativos
-    return vehicles.filter(v =>
-      (v.availableForFinancing || v.isInvestorVehicle) &&
-      !vehiclesInActiveFinancing.includes(v.id)
+    return vehicles.filter(v => 
+      // Mostra veículos que não estejam explicitamente indisponíveis e que não estejam em financiamentos ativos
+      v.available !== false && !vehiclesInActiveFinancing.includes(v.id)
     );
   }, [vehicles, financings]);
 
@@ -1719,15 +1721,15 @@ export default function FinancingWizard() {
               </Card>
             </div>
 
-            <div className="flex gap-2">
+            <div className="flex flex-col sm:flex-row gap-3 mt-4 pt-2">
               <Button
                 variant="outline"
                 onClick={() => setCalculationDetailsDialogOpen(true)}
-                className="flex-1"
+                className="flex-1 w-full"
                 data-testid="button-financing-details"
               >
-                <FileText className="h-4 w-4 mr-2" />
-                Detalhamento do Financiamento
+                <FileText className="h-4 w-4 mr-2 flex-shrink-0" />
+                <span className="truncate">Detalhamento</span>
               </Button>
 
               {!isAdmin && (
@@ -1740,11 +1742,11 @@ export default function FinancingWizard() {
                     setProposedRateType(selectedRateType);
                     setCounterProposalDialogOpen(true);
                   }}
-                  className="flex-1"
+                  className="flex-1 w-full"
                   data-testid="button-counter-proposal"
                 >
-                  <AlertCircle className="h-4 w-4 mr-2" />
-                  Solicitar Contra Proposta
+                  <AlertCircle className="h-4 w-4 mr-2 flex-shrink-0" />
+                  <span className="truncate">Contra Proposta</span>
                 </Button>
               )}
 
@@ -1770,9 +1772,10 @@ export default function FinancingWizard() {
                     description: "Valores do financiamento salvos com sucesso.",
                   });
                 }}
-                className="flex-1"
+                className="flex-1 w-full"
               >
-                Confirmar Cálculo
+                <Check className="h-4 w-4 mr-2 flex-shrink-0" />
+                <span className="truncate">Confirmar Cálculo</span>
               </Button>
             </div>
           </div>
@@ -2998,17 +3001,18 @@ export default function FinancingWizard() {
       </div>
 
       {/* Botões de navegação */}
-      <div className="flex justify-between pt-6 border-t">
-        {currentStep > 1 && (
+      <div className="flex flex-col-reverse sm:flex-row justify-between gap-3 pt-6 pb-8 border-t mt-8">
+        {currentStep > 1 ? (
           <Button
             variant="outline"
             onClick={() => setCurrentStep(currentStep - 1)}
             data-testid="button-wizard-previous"
+            className="w-full sm:w-auto"
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
             Voltar
           </Button>
-        )}
+        ) : <div className="hidden sm:block" />}
         {currentStep < 6 ? (
           <Button
             onClick={() => {
@@ -3016,7 +3020,7 @@ export default function FinancingWizard() {
                 setCurrentStep(currentStep + 1);
               }
             }}
-            className={currentStep === 1 ? "ml-auto" : ""}
+            className="w-full sm:w-auto"
             data-testid="button-wizard-next"
           >
             Próximo
@@ -3024,6 +3028,7 @@ export default function FinancingWizard() {
           </Button>
         ) : (
           <Button
+            className="w-full sm:w-auto"
             onClick={() => {
               if (!validateStep(6)) {
                 return;
@@ -3099,7 +3104,7 @@ export default function FinancingWizard() {
 
       {/* Dialog de Detalhamento do Financiamento */}
       <Dialog open={calculationDetailsDialogOpen} onOpenChange={setCalculationDetailsDialogOpen}>
-        <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
+        <DialogContent className="max-w-3xl max-h-[85vh] sm:max-h-[90vh] overflow-y-auto w-[95vw] sm:w-full">
           <DialogHeader>
             <DialogTitle>Detalhamento do Financiamento</DialogTitle>
             <DialogDescription>
@@ -3310,7 +3315,7 @@ export default function FinancingWizard() {
 
       {/* Dialog de Contra Proposta */}
       <Dialog open={counterProposalDialogOpen} onOpenChange={setCounterProposalDialogOpen}>
-        <DialogContent className="max-w-6xl max-h-[90vh] overflow-y-auto">
+        <DialogContent className="max-w-6xl max-h-[85vh] sm:max-h-[90vh] overflow-y-auto p-4 sm:p-6 w-[95vw] sm:w-full">
           <DialogHeader>
             <DialogTitle>Solicitar Contra Proposta de Financiamento</DialogTitle>
             <DialogDescription>
@@ -3556,7 +3561,7 @@ export default function FinancingWizard() {
             </Card>
 
             {/* Botões */}
-            <div className="flex justify-end gap-2">
+            <div className="flex flex-col-reverse sm:flex-row justify-end gap-3 pt-4">
               <Button
                 variant="outline"
                 onClick={() => {
@@ -3564,6 +3569,7 @@ export default function FinancingWizard() {
                   setProposalNotes("");
                 }}
                 data-testid="button-cancel-proposal"
+                className="w-full sm:w-auto"
               >
                 Cancelar
               </Button>
@@ -3571,6 +3577,7 @@ export default function FinancingWizard() {
                 onClick={handleSubmitProposal}
                 disabled={createProposalMutation.isPending}
                 data-testid="button-submit-proposal"
+                className="w-full sm:w-auto"
               >
                 {createProposalMutation.isPending ? (
                   <>
@@ -3593,7 +3600,7 @@ export default function FinancingWizard() {
 
       {/* Approved Proposal Alert */}
       <Dialog open={approvedProposalAlertOpen} onOpenChange={setApprovedProposalAlertOpen}>
-        <DialogContent className="max-w-2xl">
+        <DialogContent className="max-w-2xl max-h-[85vh] overflow-y-auto w-[95vw] sm:w-full">
           <DialogHeader>
             <DialogTitle>Proposta Aprovada!</DialogTitle>
             <DialogDescription>

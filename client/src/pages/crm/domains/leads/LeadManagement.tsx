@@ -279,28 +279,30 @@ export default function LeadManagement() {
   return (
     <>
       <Card>
-        <CardHeader className="flex flex-row items-center justify-between gap-2 flex-wrap">
+        <CardHeader className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <CardTitle>Leads</CardTitle>
             <CardDescription>
               Gestão de leads e oportunidades. Mostrando <strong>{visibleLeads?.length || 0}</strong> de <strong>{totalFiltered}</strong> leads.
             </CardDescription>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto">
             <Button
               variant="outline"
               onClick={handleExportToExcel}
               data-testid="button-export-leads"
+              className="flex-1 sm:flex-none"
             >
               <Download className="h-4 w-4 mr-2" />
-              Exportar Excel
+              <span className="truncate">Exportar</span>
             </Button>
             <Button
               onClick={() => setLeadDialogOpen(true)}
               data-testid="button-add-lead"
+              className="flex-1 sm:flex-none"
             >
               <Plus className="h-4 w-4 mr-2" />
-              Adicionar Lead
+              <span className="truncate">Adicionar Lead</span>
             </Button>
           </div>
         </CardHeader>

@@ -43,15 +43,18 @@ export default function FileUploadZone({
     return (
       <div className="space-y-3">
         {label && <label className="text-sm font-medium">{label}</label>}
-        <div className="flex items-center gap-3 p-4 rounded-lg border bg-muted/50">
-          <FileText className="h-8 w-8 text-primary" />
-          <div className="flex-1">
-            <p className="font-medium text-sm">Arquivo anexado</p>
-            <p className="text-xs text-muted-foreground">{fileData.fileName}</p>
+        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 p-4 rounded-lg border bg-muted/50">
+          <div className="flex items-center gap-3 w-full min-w-0">
+            <FileText className="h-8 w-8 text-primary flex-shrink-0" />
+            <div className="flex-1 min-w-0">
+              <p className="font-medium text-sm truncate">Arquivo anexado</p>
+              <p className="text-xs text-muted-foreground truncate">{fileData.fileName}</p>
+            </div>
           </div>
           <Button
             size="sm"
             variant="destructive"
+            className="w-full sm:w-auto"
             onClick={() => onFileChange(null)}
             data-testid={`button-remove-${testId}`}
           >

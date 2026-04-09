@@ -588,7 +588,7 @@ export default function VehicleManagement({ showOnlyTradeIns = false, readOnly =
       {/* Frota Tab */}
       {!showOnlyTradeIns && (
       <Card>
-        <CardHeader className="flex flex-row items-center justify-between gap-2 flex-wrap">
+        <CardHeader className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <CardTitle>Frota</CardTitle>
             <CardDescription>
@@ -596,7 +596,7 @@ export default function VehicleManagement({ showOnlyTradeIns = false, readOnly =
             </CardDescription>
           </div>
           {!readOnly && (
-            <div className="flex gap-2">
+            <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto">
               <Button
                 variant="outline"
                 onClick={() => {
@@ -605,9 +605,10 @@ export default function VehicleManagement({ showOnlyTradeIns = false, readOnly =
                   setBulkImportData("");
                 }}
                 data-testid="button-bulk-import-vehicles"
+                className="flex-1 sm:flex-none"
               >
                 <FileText className="h-4 w-4 mr-2" />
-                Importar Múltiplos
+                <span className="truncate">Importar</span>
               </Button>
               <Button
                 onClick={() => {
@@ -621,9 +622,10 @@ export default function VehicleManagement({ showOnlyTradeIns = false, readOnly =
                   setVehicleDialogOpen(true);
                 }}
                 data-testid="button-add-vehicle"
+                className="flex-1 sm:flex-none"
               >
                 <Plus className="h-4 w-4 mr-2" />
-                Adicionar Veículo
+                <span className="truncate">Adicionar Veículo</span>
               </Button>
             </div>
           )}
@@ -1033,15 +1035,17 @@ export default function VehicleManagement({ showOnlyTradeIns = false, readOnly =
       {/* Veículos de Troca Tab */}
       {showOnlyTradeIns && (
       <Card>
-        <CardHeader className="flex flex-row items-center justify-between gap-2 flex-wrap">
+        <CardHeader className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <CardTitle>Veículos de Troca</CardTitle>
             <CardDescription>
               Gerenciamento de veículos recebidos em troca
             </CardDescription>
           </div>
-          <Button
-            onClick={() => {
+          <div className="flex w-full sm:w-auto">
+            <Button
+              className="w-full sm:w-auto"
+              onClick={() => {
               setEditingVehicle(null);
               setVehicleFormData({ 
                 isTradeIn: true,
@@ -1055,8 +1059,9 @@ export default function VehicleManagement({ showOnlyTradeIns = false, readOnly =
             data-testid="button-add-trade-in-vehicle"
           >
             <Plus className="h-4 w-4 mr-2" />
-            Registrar Veículo de Troca
+            <span className="truncate">Registrar Veículo de Troca</span>
           </Button>
+          </div>
         </CardHeader>
         <CardContent>
           {isLoading.vehicles || isLoading.tradeInVehicles ? (

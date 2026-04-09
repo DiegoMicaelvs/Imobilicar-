@@ -195,13 +195,20 @@ function UserAccountMenu({ name, onLogout }: { name: string; onLogout: () => voi
 }
 
 function PublicActions({ isMobile = false }: { isMobile?: boolean }) {
-  const baseClass = isMobile ? "flex-1" : "hidden sm:inline-flex";
-  return (
-    <>
-      <Button variant="outline" asChild className={baseClass} data-testid={isMobile ? "button-login-mobile" : "button-login"}>
+  if (isMobile) {
+    return (
+      <Button variant="outline" asChild className="flex-1" data-testid="button-login-mobile">
         <Link href="/login">Portal do Investidor</Link>
       </Button>
-      <Button variant="ghost" asChild className={baseClass} data-testid={isMobile ? "button-admin-mobile" : "button-admin"}>
+    );
+  }
+
+  return (
+    <>
+      <Button variant="outline" asChild className="hidden sm:inline-flex" data-testid="button-login">
+        <Link href="/login">Portal do Investidor</Link>
+      </Button>
+      <Button variant="ghost" size="sm" asChild className="inline-flex px-2 sm:px-4" data-testid="button-admin">
         <Link href="/admin">Admin</Link>
       </Button>
     </>

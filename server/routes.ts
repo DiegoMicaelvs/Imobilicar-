@@ -13,14 +13,18 @@ import * as path from "path";
 import multer from "multer";
 
 const uploadDir = path.join(process.cwd(), 'uploads', 'videos');
-if (!fs.existsSync(uploadDir)) {
-  fs.mkdirSync(uploadDir, { recursive: true });
-}
-
-// Diretório para chunks temporários
 const chunksDir = path.join(process.cwd(), 'uploads', 'chunks');
-if (!fs.existsSync(chunksDir)) {
-  fs.mkdirSync(chunksDir, { recursive: true });
+
+// Ensure directories exist (wrapped in try-catch for read-only filesystems like Vercel)
+try {
+  if (!fs.existsSync(uploadDir)) {
+    fs.mkdirSync(uploadDir, { recursive: true });
+  }
+  if (!fs.existsSync(chunksDir)) {
+    fs.mkdirSync(chunksDir, { recursive: true });
+  }
+} catch (err) {
+  console.warn("Could not create upload directories (possibly read-only filesystem):", err);
 }
 
 // Sanitiza uploadId para evitar path traversal

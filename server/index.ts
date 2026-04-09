@@ -30,17 +30,20 @@ app.use((req, res, next) => {
   next();
 });
 
-(async () => {
-  const server = await registerRoutes(app);
+// Initialization promise to ensure routes are registered before handling requests
+let isInitialized = false;
+const initializationPromise = (async () => {
+  try {
+    const server = await registerRoutes(app);
 
-  // Serve static files from attached_assets
-  app.use('/attached_assets', express.static('attached_assets'));
+    // Serve static files from attached_assets
+    app.use('/attached_assets', express.static('attached_assets'));
 
-  app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
-    const status = err.status || err.statusCode || 500;
-    const message = err.message || "Internal Server Error";
-    res.status(status).json({ message });
-  });
+    app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
+      const status = err.status || err.statusCode || 500;
+      const message = err.message || "Internal Server Error";
+      res.status(status).json({ message });
+    });
 
     if (app.get("env") === "development") {
       await setupVite(app, server);
@@ -48,17 +51,26 @@ app.use((req, res, next) => {
       serveStatic(app);
     }
 
-  // Only start the server if we're not running as a Vercel serverless function
-  if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
-    const port = parseInt(process.env.PORT || '5000', 10);
-    server.listen({
-      port,
-      host: "0.0.0.0",
-    }, () => {
-      log(`serving on port ${port}`);
-    });
+    // Only start the server if we're not running as a Vercel serverless function
+    if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
+      const port = parseInt(process.env.PORT || '5000', 10);
+      server.listen({
+        port,
+        host: "0.0.0.0",
+      }, () => {
+        log(`serving on port ${port}`);
+      });
+    }
+    isInitialized = true;
+    return server;
+  } catch (error) {
+    log(`Initialization error: ${error}`);
+    throw error;
   }
 })();
 
-// Export app for Vercel
-export default app;
+// Vercel entry point - ensures initialization before handling any request
+export default async (req: Request, res: Response) => {
+  await initializationPromise;
+  return app(req, res);
+};

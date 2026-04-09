@@ -60,3 +60,6 @@ app.use((req, res, next) => {
     log(`serving on port ${port}`);
   });
 })();
+
+// Export app for Vercel
+export default app;

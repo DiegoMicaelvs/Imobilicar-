@@ -35,7 +35,7 @@ export async function setupVite(app: Express, server: Server) {
       },
     },
     root: path.resolve(process.cwd(), "client"),
-    configFile: false, // Não tentar carregar arquivo do disco
+    configFile: false,
     customLogger: {
       ...viteLogger,
       error: (msg, options) => {

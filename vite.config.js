@@ -2,7 +2,6 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
 
-// Usando o nome curto (8.3) do Windows para evitar o acento no "usuário"
 const cleanRoot = path.resolve(__dirname);
 
 export default defineConfig({

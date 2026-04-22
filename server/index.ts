@@ -44,10 +44,12 @@ const initializationPromise = (async () => {
       res.status(status).json({ message });
     });
 
-    if (app.get("env") === "development") {
-      await setupVite(app, server);
-    } else {
-      serveStatic(app);
+    if (!process.env.VERCEL) {
+      if (app.get("env") === "development") {
+        await setupVite(app, server);
+      } else {
+        serveStatic(app);
+      }
     }
 
     // Only start the server if we're not running as a Vercel serverless function

@@ -16,15 +16,8 @@ export default async function handler(req: Request, res: Response) {
     isInitialized = true;
   }
   
-  // Vercel routes to `/api` often strip the `/api` prefix in `req.url`.
-  // Express expects routes to match exactly e.g. `/api/admin/auth`.
-  // So we ensure `req.url` starts with `/api` if it doesn't already.
-  const originalUrl = req.url;
-  if (!req.url.startsWith('/api')) {
-    req.url = `/api${req.url === '/' ? '' : req.url}`;
-  }
-  
-  console.log(`[Vercel Serverless] Routing request: originalUrl=${originalUrl} -> req.url=${req.url}`);
+  // Let Express handle the native Vercel request
+  return app(req, res);
 
   return app(req, res);
 }

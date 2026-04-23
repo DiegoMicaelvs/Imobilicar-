@@ -16,6 +16,11 @@ export default async function handler(req: Request, res: Response) {
     isInitialized = true;
   }
   
+  // Vercel sometimes strips the `/api` mount point. Express requires it.
+  if (!req.url.startsWith('/api')) {
+    req.url = `/api${req.url === '/' ? '' : req.url}`;
+  }
+  
   // Let Express handle the native Vercel request
   return app(req, res);
 

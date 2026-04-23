@@ -7,11 +7,11 @@
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "/api/index"
+      "destination": "/api"
     },
     {
       "source": "/attached_assets/(.*)",
-      "destination": "/api/index"
+      "destination": "/api"
     },
     {
       "source": "/((?!_next|favicon\\.ico).+\\.(js|css|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot|webp|map|json))",

@@ -6,12 +6,12 @@
   "framework": null,
   "rewrites": [
     {
-      "source": "/api/:path*",
-      "destination": "/api"
+      "source": "/api/(.*)",
+      "destination": "/api/index"
     },
     {
-      "source": "/attached_assets/:path*",
-      "destination": "/api"
+      "source": "/attached_assets/(.*)",
+      "destination": "/api/index"
     },
     {
       "source": "/((?!_next|favicon\\.ico).+\\.(js|css|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot|webp|map|json))",
